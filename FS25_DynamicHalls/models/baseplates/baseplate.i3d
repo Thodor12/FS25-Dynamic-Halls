@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<i3D name="baseplate" version="1.6" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://i3d.giants.ch/schema/i3d-1.6.xsd">
+  <Asset>
+    <Export program="i3dConverter" version="1.0"/>
+  </Asset>
+
+  <Files>
+    <File fileId="1" filename="marker_diffuse.dds"/>
+  </Files>
+
+
+  <Materials>
+    <Material name="Material" materialId="1" specularColor="0.6 1 0" alphaBlending="true">
+      <Texture fileId="1"/>
+    </Material>
+  </Materials>
+
+
+  <Shapes externalShapesFile="baseplate.i3d.shapes">
+  </Shapes>
+
+  <Scene>
+    <TransformGroup name="baseplateRoot" nodeId="4">
+      <TransformGroup name="levelHeight" translation="0 0 10" nodeId="5"/>
+      <TransformGroup name="levelStart" nodeId="6"/>
+      <TransformGroup name="levelWidth" translation="10 0 0" nodeId="7"/>
+      <Shape name="marker" shapeId="1" static="true" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" nodeId="8" castsShadows="true" receiveShadows="true" materialIds="1"/>
+    </TransformGroup>
+  </Scene>
+
+</i3D>

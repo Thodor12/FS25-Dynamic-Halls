@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<modDesc descVersion="99">
+    <author>Thodor12</author>
+    <version>0.0.1</version>
+
+    <title>
+        <en>Dynamic Halls</en>
+    </title>
+
+    <description>
+        <en>Prototype: dynamically buildable hall system. Test box for placement/scripting
+            groundwork.</en>
+    </description>
+
+    <iconFilename>icon_dynamicHalls.dds</iconFilename>
+
+    <multiplayer supported="false" />
+
+    <storeItems>
+        <storeItem xmlFilename="placeables/testBox/testBox.xml" />
+        <storeItem xmlFilename="placeables/testBaseplate/testBaseplate.xml" />
+    </storeItems>
+
+    <l10n>
+        <text name="TESTBOX_STORE_NAME">
+            <en>Test Box (Pink)</en>
+        </text>
+        <text name="TESTBASEPLATE_STORE_NAME">
+            <en>Test Baseplate</en>
+        </text>
+    </l10n>
+
+    <placeableSpecializations>
+        <specialization name="dynamicHallsBaseplate"
+                         className="DynamicHallsBaseplate"
+                         filename="scripts/DynamicHallsBaseplate.lua"/>
+    </placeableSpecializations>
+
+    <placeableTypes>
+        <type name="dynamicHallsBaseplate" parent="simplePlaceable"
+              className="Placeable"
+              filename="$dataS/scripts/placeables/Placeable.lua">
+            <specialization name="dynamicHallsBaseplate" />
+        </type>
+    </placeableTypes>
+</modDesc>

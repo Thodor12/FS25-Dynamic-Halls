@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<placeable type="dynamicHallsBaseplate">
+    <storeData>
+        <name>$l10n_TESTBASEPLATE_STORE_NAME</name>
+        <functions>
+            <function>$l10n_function_decoration</function>
+        </functions>
+        <image>placeables/testBaseplate/store_testBaseplate.dds</image>
+        <price>100</price>
+        <dailyUpkeep>0</dailyUpkeep>
+        <lifetime>1000</lifetime>
+        <rotation>0</rotation>
+        <brand>NONE</brand>
+        <species>PLACEABLE</species>
+        <category>decoration</category>
+        <brush>
+            <type>placeable</type>
+            <category>decoration</category>
+            <tab>decoration</tab>
+        </brush>
+        <canBeSold>true</canBeSold>
+        <showInStore>true</showInStore>
+    </storeData>
+
+    <base>
+        <filename>models/baseplates/baseplate.i3d</filename>
+    </base>
+
+    <placement useRandomYRotation="false" useManualYRotation="true" />
+
+    <dynamicHallsWidth>
+        <dynamicHallsWidthConfigurations title="Width">
+            <dynamicHallsWidthConfiguration name="10m" value="10" isDefault="true" />
+            <dynamicHallsWidthConfiguration name="20m" value="20" />
+            <dynamicHallsWidthConfiguration name="30m" value="30" />
+            <dynamicHallsWidthConfiguration name="40m" value="40" />
+            <dynamicHallsWidthConfiguration name="50m" value="50" />
+            <dynamicHallsWidthConfiguration name="60m" value="60" />
+            <dynamicHallsWidthConfiguration name="70m" value="70" />
+            <dynamicHallsWidthConfiguration name="80m" value="80" />
+            <dynamicHallsWidthConfiguration name="90m" value="90" />
+            <dynamicHallsWidthConfiguration name="100m" value="100" />
+        </dynamicHallsWidthConfigurations>
+    </dynamicHallsWidth>
+
+    <dynamicHallsLength>
+        <dynamicHallsLengthConfigurations title="Length">
+            <dynamicHallsLengthConfiguration name="10m" value="10" isDefault="true" />
+            <dynamicHallsLengthConfiguration name="20m" value="20" />
+            <dynamicHallsLengthConfiguration name="30m" value="30" />
+            <dynamicHallsLengthConfiguration name="40m" value="40" />
+            <dynamicHallsLengthConfiguration name="50m" value="50" />
+            <dynamicHallsLengthConfiguration name="60m" value="60" />
+            <dynamicHallsLengthConfiguration name="70m" value="70" />
+            <dynamicHallsLengthConfiguration name="80m" value="80" />
+            <dynamicHallsLengthConfiguration name="90m" value="90" />
+            <dynamicHallsLengthConfiguration name="100m" value="100" />
+        </dynamicHallsLengthConfigurations>
+    </dynamicHallsLength>
+
+    <clearAreas/>
+
+    <leveling requireLeveling="false" maxSmoothDistance="3" maxSlope="75" maxEdgeAngle="30">
+        <levelAreas>
+            <levelArea startNode="levelStart" widthNode="levelWidth" heightNode="levelHeight" groundType="grass" />
+        </levelAreas>
+    </leveling>
+
+    <indoorAreas/>
+
+    <i3dMappings>
+        <i3dMapping id="levelHeight" node="0>0" />
+        <i3dMapping id="levelStart" node="0>1" />
+        <i3dMapping id="levelWidth" node="0>2" />
+        <i3dMapping id="marker" node="0>3" />
+    </i3dMappings>
+</placeable>

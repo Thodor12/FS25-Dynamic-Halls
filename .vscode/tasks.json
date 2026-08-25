@@ -1,0 +1,32 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Build Textures (PNG -> DDS)",
+      "type": "shell",
+      "command": "textureTool.exe",
+      "args": ["-recursive", "-inputs", "Source"],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Build Textures (PNG -> DDS, force)",
+      "type": "shell",
+      "command": "textureTool.exe",
+      "args": ["-recursive", "-ignoreTimestamp", "-inputs", "Source"],
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    }
+  ]
+}
