@@ -1,3 +1,7 @@
 # Ignore blender history files
 *.blend1
 *.blend2
+
+# Source/ .dds files are textureTool-generated build artifacts, not authored assets.
+# The actual used assets in Source need to be included in a model and exported to the actual mod folders.
+Source/**/*.dds
