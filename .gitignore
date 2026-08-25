@@ -1,0 +1,3 @@
+# Ignore blender history files
+*.blend1
+*.blend2
