@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
-<modDesc descVersion="99">
+<modDesc descVersion="99" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://validation.gdn.giants-software.com/xml/fs25/modDesc.xsd">
     <author>Thodor12</author>
     <version>0.0.1</version>
 
@@ -8,39 +8,35 @@
     </title>
 
     <description>
-        <en>Prototype: dynamically buildable hall system. Test box for placement/scripting
+        <en>Dynamically buildable hall system. Test box for placement/scripting
             groundwork.</en>
     </description>
 
     <iconFilename>icon_dynamicHalls.dds</iconFilename>
 
-    <multiplayer supported="false" />
+    <multiplayer supported="false"/>
+
+    <extraSourceFiles>
+        <sourceFile filename="scripts/DebugTerrainProbe.lua"/>
+    </extraSourceFiles>
 
     <storeItems>
-        <storeItem xmlFilename="placeables/testBox/testBox.xml" />
-        <storeItem xmlFilename="placeables/testBaseplate/testBaseplate.xml" />
+        <storeItem xmlFilename="placeables/testBaseplate/testBaseplate.xml"/>
     </storeItems>
 
     <l10n>
-        <text name="TESTBOX_STORE_NAME">
-            <en>Test Box (Pink)</en>
-        </text>
         <text name="TESTBASEPLATE_STORE_NAME">
             <en>Test Baseplate</en>
         </text>
     </l10n>
 
     <placeableSpecializations>
-        <specialization name="dynamicHallsBaseplate"
-                         className="DynamicHallsBaseplate"
-                         filename="scripts/DynamicHallsBaseplate.lua"/>
+        <specialization name="dynamicHallsBaseplate" className="DynamicHallsBaseplate" filename="scripts/DynamicHallsBaseplate.lua"/>
     </placeableSpecializations>
 
     <placeableTypes>
-        <type name="dynamicHallsBaseplate" parent="simplePlaceable"
-              className="Placeable"
-              filename="$dataS/scripts/placeables/Placeable.lua">
-            <specialization name="dynamicHallsBaseplate" />
+        <type name="dynamicHallsBaseplate" parent="simplePlaceable" className="Placeable" filename="$dataS/scripts/placeables/Placeable.lua">
+            <specialization name="dynamicHallsBaseplate"/>
         </type>
     </placeableTypes>
 </modDesc>

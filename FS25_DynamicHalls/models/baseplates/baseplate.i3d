@@ -6,13 +6,19 @@
   </Asset>
 
   <Files>
-    <File fileId="1" filename="marker_diffuse.dds"/>
+    <File fileId="3" filename="$data/shared/warningStripes_diffuse.dds"/>
+    <File fileId="4" filename="$data/shared/warningStripes_normal.dds"/>
+    <File fileId="5" filename="$data/shared/warningStripes_specular.dds"/>
   </Files>
 
 
   <Materials>
-    <Material name="Material" materialId="1" specularColor="0.6 1 0" alphaBlending="true">
-      <Texture fileId="1"/>
+    <Material name="i3d_default_material" materialId="1" diffuseColor="0.8 0.8 0.8 1" specularColor="0.501961 1 0">
+    </Material>
+    <Material name="warningStripes_mat" materialId="2">
+      <Texture fileId="3"/>
+      <Normalmap fileId="4"/>
+      <Glossmap fileId="5"/>
     </Material>
   </Materials>
 
@@ -21,11 +27,27 @@
   </Shapes>
 
   <Scene>
-    <TransformGroup name="baseplateRoot" nodeId="4">
-      <TransformGroup name="levelHeight" translation="0 0 10" nodeId="5"/>
-      <TransformGroup name="levelStart" nodeId="6"/>
-      <TransformGroup name="levelWidth" translation="10 0 0" nodeId="7"/>
-      <Shape name="marker" shapeId="1" static="true" collisionFilterGroup="0x3e" collisionFilterMask="0xfffffbff" nodeId="8" castsShadows="true" receiveShadows="true" materialIds="1"/>
+    <TransformGroup name="baseplateRoot" nodeId="9">
+      <TransformGroup name="collision" nodeId="10">
+        <Shape name="collisionFloor" shapeId="1" static="true" collisionFilterGroup="0x1034" collisionFilterMask="0xfffffbff" nodeId="11" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="1"/>
+      </TransformGroup>
+      <TransformGroup name="leveling" nodeId="12">
+        <TransformGroup name="levelStart" nodeId="13">
+          <TransformGroup name="levelHeight" nodeId="14"/>
+          <TransformGroup name="levelWidth" nodeId="15"/>
+        </TransformGroup>
+      </TransformGroup>
+      <TransformGroup name="testAreas" nodeId="16">
+        <TransformGroup name="testAreaStart" nodeId="17">
+          <TransformGroup name="testAreaEnd" nodeId="18"/>
+        </TransformGroup>
+      </TransformGroup>
+      <TransformGroup name="warningStripe" nodeId="19">
+        <Shape name="tileCorner" shapeId="2" nodeId="20" castsShadows="true" receiveShadows="true" materialIds="2"/>
+        <Shape name="tileCornerInverted" shapeId="3" nodeId="21" castsShadows="true" receiveShadows="true" materialIds="2"/>
+        <Shape name="tileHorizontal" shapeId="4" nodeId="22" castsShadows="true" receiveShadows="true" materialIds="2"/>
+        <Shape name="tileVertical" shapeId="5" nodeId="23" castsShadows="true" receiveShadows="true" materialIds="2"/>
+      </TransformGroup>
     </TransformGroup>
   </Scene>
 
