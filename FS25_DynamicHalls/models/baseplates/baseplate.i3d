@@ -1,54 +1,49 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 
 <i3D name="baseplate" version="1.6" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://i3d.giants.ch/schema/i3d-1.6.xsd">
-  <Asset>
-    <Export program="i3dConverter" version="1.0"/>
-  </Asset>
+    <Asset>
+        <Export program="i3dConverter" version="1.0"/>
+    </Asset>
 
-  <Files>
-    <File fileId="3" filename="$data/shared/warningStripes_diffuse.dds"/>
-    <File fileId="4" filename="$data/shared/warningStripes_normal.dds"/>
-    <File fileId="5" filename="$data/shared/warningStripes_specular.dds"/>
-  </Files>
+    <Files>
+        <File fileId="3" filename="$data/shared/warningStripes_diffuse.dds"/>
+        <File fileId="4" filename="$data/shared/warningStripes_normal.dds"/>
+        <File fileId="5" filename="$data/shared/warningStripes_specular.dds"/>
+    </Files>
 
+    <Materials>
+        <Material name="i3d_default_material" materialId="1" diffuseColor="0.8 0.8 0.8 1" specularColor="0.501961 1 0"/>
+        <Material name="warningStripes_mat" materialId="2">
+            <Texture fileId="3"/>
+            <Normalmap fileId="4"/>
+            <Glossmap fileId="5"/>
+        </Material>
+    </Materials>
 
-  <Materials>
-    <Material name="i3d_default_material" materialId="1" diffuseColor="0.8 0.8 0.8 1" specularColor="0.501961 1 0">
-    </Material>
-    <Material name="warningStripes_mat" materialId="2">
-      <Texture fileId="3"/>
-      <Normalmap fileId="4"/>
-      <Glossmap fileId="5"/>
-    </Material>
-  </Materials>
+    <Shapes externalShapesFile="baseplate.i3d.shapes"/>
 
-
-  <Shapes externalShapesFile="baseplate.i3d.shapes">
-  </Shapes>
-
-  <Scene>
-    <TransformGroup name="baseplateRoot" nodeId="9">
-      <TransformGroup name="collision" nodeId="10">
-        <Shape name="collisionFloor" shapeId="1" static="true" collisionFilterGroup="0x1034" collisionFilterMask="0xfffffbff" nodeId="11" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="1"/>
-      </TransformGroup>
-      <TransformGroup name="leveling" nodeId="12">
-        <TransformGroup name="levelStart" nodeId="13">
-          <TransformGroup name="levelHeight" nodeId="14"/>
-          <TransformGroup name="levelWidth" nodeId="15"/>
+    <Scene>
+        <TransformGroup name="baseplateRoot" nodeId="9">
+            <TransformGroup name="collision" nodeId="10">
+                <Shape name="collisionFloor"     shapeId="1" static="true" density="0" collisionFilterGroup="0x1034" collisionFilterMask="0xfffffbff" nodeId="11" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="1"/>
+            </TransformGroup>
+            <TransformGroup name="leveling" nodeId="12">
+                <TransformGroup name="levelStart" nodeId="13">
+                    <TransformGroup name="levelHeight" nodeId="14"/>
+                    <TransformGroup name="levelWidth"  nodeId="15"/>
+                </TransformGroup>
+            </TransformGroup>
+            <TransformGroup name="testAreas" nodeId="16">
+                <TransformGroup name="testAreaStart" nodeId="17">
+                    <TransformGroup name="testAreaEnd" nodeId="18"/>
+                </TransformGroup>
+            </TransformGroup>
+            <TransformGroup name="warningStripe" nodeId="19">
+                <Shape name="tileCorner"         shapeId="2"                                                                                          nodeId="20" castsShadows="true" receiveShadows="true"                      materialIds="2"/>
+                <Shape name="tileCornerInverted" shapeId="3"                                                                                          nodeId="21" castsShadows="true" receiveShadows="true"                      materialIds="2"/>
+                <Shape name="tileHorizontal"     shapeId="4"                                                                                          nodeId="22" castsShadows="true" receiveShadows="true"                      materialIds="2"/>
+                <Shape name="tileVertical"       shapeId="5"                                                                                          nodeId="23" castsShadows="true" receiveShadows="true"                      materialIds="2"/>
+            </TransformGroup>
         </TransformGroup>
-      </TransformGroup>
-      <TransformGroup name="testAreas" nodeId="16">
-        <TransformGroup name="testAreaStart" nodeId="17">
-          <TransformGroup name="testAreaEnd" nodeId="18"/>
-        </TransformGroup>
-      </TransformGroup>
-      <TransformGroup name="warningStripe" nodeId="19">
-        <Shape name="tileCorner" shapeId="2" nodeId="20" castsShadows="true" receiveShadows="true" materialIds="2"/>
-        <Shape name="tileCornerInverted" shapeId="3" nodeId="21" castsShadows="true" receiveShadows="true" materialIds="2"/>
-        <Shape name="tileHorizontal" shapeId="4" nodeId="22" castsShadows="true" receiveShadows="true" materialIds="2"/>
-        <Shape name="tileVertical" shapeId="5" nodeId="23" castsShadows="true" receiveShadows="true" materialIds="2"/>
-      </TransformGroup>
-    </TransformGroup>
-  </Scene>
-
+    </Scene>
 </i3D>

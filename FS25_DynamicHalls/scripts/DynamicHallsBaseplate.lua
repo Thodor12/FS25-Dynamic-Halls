@@ -36,11 +36,11 @@ function DynamicHallsBaseplate:onLoad(savegame)
     local widthNode = self.xmlFile:getValue("placeable.leveling.levelAreas.levelArea(0)#widthNode", nil, self.components, self.i3dMappings)
     local heightNode = self.xmlFile:getValue("placeable.leveling.levelAreas.levelArea(0)#heightNode", nil, self.components, self.i3dMappings)
 
-    local levelingPad = 1
+    local levelingPad = 2
     local halfWidth = spec.width / 2
     local halfLength = spec.length / 2
 
-    -- levelWidth/levelHeight are now children of levelStart (matching real vanilla convention,
+    -- levelWidth/levelHeight are children of levelStart (matching real vanilla convention,
     -- confirmed against 10 real placeable i3d files), so their translations are LOCAL OFFSETS
     -- from levelStart, not absolute/parent-relative positions.
     if startNode ~= nil then
@@ -89,10 +89,23 @@ function DynamicHallsBaseplate:onLoad(savegame)
         end
     end
 
-    local collisionFloorMapping = self.i3dMappings["collisionFloor"]
-    if collisionFloorMapping ~= nil then
-        setTranslation(collisionFloorMapping.nodeId, 0, 0, 0)
-        setScale(collisionFloorMapping.nodeId, spec.width, 1, spec.length)
+    -- tipOcclusionUpdateAreas is what ACTUALLY registers post-placement protection against the
+    -- terrain sculpting tool (confirmed empirically - this is unrelated to PlaceableLeveling /
+    -- placementCollisionMap, despite its schema description sounding like it's only about
+    -- tip-pile/material dumping). It reuses levelWidth/levelHeight (already repositioned above)
+    -- as its two opposing corners, so it covers the padded leveling footprint rather than the
+    -- tighter testArea footprint - no dedicated nodes needed.
+
+    -- Same caching bug as testAreas: PlaceableTipOcclusionAreas:onLoad already ran (base specs
+    -- load before ours) and cached area.center/area.size from the nodes' default (pre-resize)
+    -- positions via loadTipOcclusionArea's localToLocal call. Force a recompute now that the
+    -- nodes are correctly positioned.
+    local tipOcclusionAreasSpec = self.spec_tipOcclusionAreas
+    if tipOcclusionAreasSpec ~= nil and tipOcclusionAreasSpec.areas ~= nil then
+        for i, area in ipairs(tipOcclusionAreasSpec.areas) do
+            local key = string.format("placeable.tipOcclusionUpdateAreas.tipOcclusionUpdateArea(%d)", i - 1)
+            self:loadTipOcclusionArea(self.xmlFile, key, area)
+        end
     end
 
     local stripThickness = 0.5
@@ -100,6 +113,16 @@ function DynamicHallsBaseplate:onLoad(savegame)
     local tileLength = 10
     local outerHalfWidth = halfWidth + stripThickness / 2
     local outerHalfLength = halfLength + stripThickness / 2
+
+    -- Extend the collision floor out to the warning stripe's outer edge (not just the bare
+    -- footprint), so there's always a small buffer of visible/walkable "owned" ground between the
+    -- building edge and the leveled/protected area's boundary - the building should never sit
+    -- exactly on the raw edge of the terrain deformation zone.
+    local collisionFloorMapping = self.i3dMappings["collisionFloor"]
+    if collisionFloorMapping ~= nil then
+        setTranslation(collisionFloorMapping.nodeId, 0, 0, 0)
+        setScale(collisionFloorMapping.nodeId, spec.width + stripThickness * 2, 1, spec.length + stripThickness * 2)
+    end
 
     local tileHorizontalMapping = self.i3dMappings["tileHorizontal"]
     local tileVerticalMapping = self.i3dMappings["tileVertical"]

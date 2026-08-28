@@ -64,13 +64,15 @@
 
     <clearAreas/>
 
-    <leveling requireLeveling="true" maxSmoothDistance="3" maxSlope="75" maxEdgeAngle="30">
+    <leveling requireLeveling="true" maxSmoothDistance="10" maxSlope="75" maxEdgeAngle="30">
         <levelAreas>
             <levelArea startNode="levelStart" widthNode="levelWidth" heightNode="levelHeight"/>
         </levelAreas>
     </leveling>
 
-    <indoorAreas/>
+    <tipOcclusionUpdateAreas>
+        <tipOcclusionUpdateArea startNode="levelWidth" endNode="levelHeight"/>
+    </tipOcclusionUpdateAreas>
 
     <i3dMappings>
         <i3dMapping id="collisionFloor" node="0>0|0" />
