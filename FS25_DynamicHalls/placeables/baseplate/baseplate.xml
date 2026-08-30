@@ -1,23 +1,15 @@
 <?xml version="1.0" encoding="utf-8" standalone="no" ?>
-<placeable type="dynamicHallsBaseplate" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://validation.gdn.giants-software.com/xml/fs25/placeable.xsd">
+<placeable type="dynamicHallsPlaceable" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://validation.gdn.giants-software.com/xml/fs25/placeable.xsd">
     <storeData>
-        <name>$l10n_TESTBASEPLATE_STORE_NAME</name>
-        <functions>
-            <function>$l10n_function_decoration</function>
-        </functions>
-        <image>placeables/testBaseplate/store_testBaseplate.dds</image>
+        <name>$l10n_BASEPLATE_STORE_NAME</name>
+        <image>placeables/baseplate/store_baseplate.dds</image>
         <price>0</price>
         <dailyUpkeep>0</dailyUpkeep>
         <lifetime>1000</lifetime>
         <rotation>0</rotation>
         <brand>NONE</brand>
         <species>PLACEABLE</species>
-        <category>decoration</category>
-        <brush>
-            <type>placeable</type>
-            <category>decoration</category>
-            <tab>decoration</tab>
-        </brush>
+        <category>sheds</category>
         <canBeSold>true</canBeSold>
         <showInStore>true</showInStore>
     </storeData>
