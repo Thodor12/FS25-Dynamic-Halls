@@ -18,6 +18,7 @@
 
     <extraSourceFiles>
         <sourceFile filename="scripts/Constants.lua"/>
+        <sourceFile filename="scripts/AreaMarkers.lua"/>
         <sourceFile filename="scripts/WarningStripe.lua"/>
     </extraSourceFiles>
 

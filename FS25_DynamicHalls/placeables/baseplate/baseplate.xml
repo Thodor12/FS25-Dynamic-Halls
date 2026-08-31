@@ -54,8 +54,6 @@
         </dynamicHallsLengthConfigurations>
     </dynamicHallsLength>
 
-    <clearAreas/>
-
     <leveling requireLeveling="true" maxSmoothDistance="10" maxSlope="75" maxEdgeAngle="30">
         <levelAreas>
             <levelArea startNode="levelStart" widthNode="levelWidth" heightNode="levelHeight"/>
@@ -66,16 +64,21 @@
         <tipOcclusionUpdateArea startNode="levelWidth" endNode="levelHeight"/>
     </tipOcclusionUpdateAreas>
 
+    <triggerMarkers>
+        <triggerMarker node="interactionTrigger" filename="$data/shared/assets/marker/markerIconWrench.i3d" adjustToGround="true"/>
+    </triggerMarkers>
+
     <i3dMappings>
         <i3dMapping id="collisionFloor" node="0>0|0" />
-        <i3dMapping id="levelStart" node="0>1|0" />
-        <i3dMapping id="levelHeight" node="0>1|0|0" />
-        <i3dMapping id="levelWidth" node="0>1|0|1" />
-        <i3dMapping id="testAreaStart" node="0>2|0" />
-        <i3dMapping id="testAreaEnd" node="0>2|0|0" />
-        <i3dMapping id="tileCorner" node="0>3|0" />
-        <i3dMapping id="tileCornerInverted" node="0>3|1" />
-        <i3dMapping id="tileHorizontal" node="0>3|2" />
-        <i3dMapping id="tileVertical" node="0>3|3" />
+        <i3dMapping id="interactionTrigger" node="0>1|0" />
+        <i3dMapping id="levelStart" node="0>2|0" />
+        <i3dMapping id="levelHeight" node="0>2|0|0" />
+        <i3dMapping id="levelWidth" node="0>2|0|1" />
+        <i3dMapping id="testAreaStart" node="0>3|0" />
+        <i3dMapping id="testAreaEnd" node="0>3|0|0" />
+        <i3dMapping id="tileCorner" node="0>4|0" />
+        <i3dMapping id="tileCornerInverted" node="0>4|1" />
+        <i3dMapping id="tileHorizontal" node="0>4|2" />
+        <i3dMapping id="tileVertical" node="0>4|3" />
     </i3dMappings>
 </placeable>
