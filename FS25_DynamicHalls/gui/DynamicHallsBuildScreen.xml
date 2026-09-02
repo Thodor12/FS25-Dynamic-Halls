@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<GUI onOpen="onOpen" onClose="onClose" onCreate="onCreate">
+    <ThreePartBitmap profile="fs25_dynamicHallsBuildSubCategoryContainerBg" id="contentContainer">
+        <Bitmap profile="fs25_dynamicHallsBuildSubCategoryContainerArrow"/>
+        <Bitmap profile="fs25_dynamicHallsBuildDetailsBoxBg">
+            <Text profile="fs25_dynamicHallsBuildDetailsName" id="itemDetailsName"/>
+        </Bitmap>
+        <Bitmap profile="fs25_subCategoryContainer" id="menuBox">
+            <GuiElement profile="fs25_subCategoryContainer" id="listBox">
+                <MultiTextOption profile="fs25_subCategorySelector" id="subCategorySelector" onClick="onSubCategoryChanged"/>
+                <BoxLayout profile="fs25_subCategorySelectorBox" id="subCategoryDotBox"/>
+                <RoundCorner profile="fs25_subCategorySelectorDot" id="subCategoryDotTemplate"/>
+                <GuiElement profile="fs25_dynamicHallsBuildListContainer">
+                    <SmoothList profile="fs25_dynamicHallsBuildList" id="itemList" onClick="onClickItem" startClipperElementName="leftClipper" endClipperElementName="rightClipper">
+                        <ListItem profile="fs25_dynamicHallsBuildListItem">
+                            <Bitmap profile="fs25_dynamicHallsBuildListItemBackground"/>
+                            <Bitmap profile="fs25_dynamicHallsBuildListItemImage" name="icon"/>
+                        </ListItem>
+                    </SmoothList>
+                    <ThreePartBitmap profile="fs25_listSliderBox" position="26px 0px" absoluteSizeOffset="0px 15px" pivot="1 1">
+                        <Slider profile="fs25_listSlider" dataElementId="itemList"/>
+                    </ThreePartBitmap>
+                    <Bitmap profile="fs25_startClipperSmall" name="leftClipper"/>
+                    <Bitmap profile="fs25_stopClipperSmall" name="rightClipper"/>
+                </GuiElement>
+            </GuiElement>
+        </Bitmap>
+    </ThreePartBitmap>
+    <Bitmap profile="fs25_tabListContainer" id="categoryContainer">
+        <SmoothList profile="fs25_tabList" id="categorySelector">
+            <ListItem profile="fs25_tabListItem">
+                <Button profile="fs25_tabListItemButton" name="tabButton"/>
+                <Bitmap profile="fs25_tabListItemSeparator"/>
+                <Bitmap profile="fs25_tabListItemSeparatorBottom"/>
+            </ListItem>
+        </SmoothList>
+    </Bitmap>
+    <BoxLayout profile="fs25_buttonBox" id="buttonsPanel">
+        <Button profile="buttonBack" id="buttonBack" onClick="onClickBack" text="$l10n_button_back"/>
+    </BoxLayout>
+    <GuiElement profile="fs25_helpDisplay" id="helpDisplay"/>
+
+    <GUIProfiles>
+        <Profile name="fs25_helpDisplay" extends="emptyPanel" with="anchorTopLeft">
+            <position value="537px 0px"/>
+        </Profile>
+        <Profile name="fs25_dynamicHallsBuildSubCategoryContainerBg" extends="fs25_subCategoryContainerBg">
+            <position value="125px 0px"/>
+        </Profile>
+        <Profile name="fs25_dynamicHallsBuildSubCategoryContainerArrow" extends="fs25_subCategoryContainerArrow"/>
+
+        <Profile name="fs25_dynamicHallsBuildListContainer" extends="emptyPanel" with="anchorStretchingYStretchingX pivotTopLeft">
+            <absoluteSizeOffset value="75px 345px"/>
+            <position value="25px -145px"/>
+        </Profile>
+        <Profile name="fs25_dynamicHallsBuildList" extends="emptyPanel" with="anchorStretchingYStretchingX">
+            <numLateralItems value="2"/>
+            <showHighlights value="true"/>
+            <listItemSpacing value="-22px"/>
+            <listItemLateralSpacing value="5px"/>
+        </Profile>
+        <Profile name="fs25_dynamicHallsBuildListItem" extends="emptyPanel" with="anchorTopLeft">
+            <size value="182px 226px"/>
+        </Profile>
+        <Profile name="fs25_dynamicHallsBuildListItemBackground" extends="baseReference" with="anchorStretchingYStretchingX">
+            <imageSliceId value="gui.buildmenu_box"/>
+            <imageSelectedSliceId value="gui.buildmenu_box_selected"/>
+            <imageHighlightedSliceId value="gui.buildmenu_box_hover"/>
+        </Profile>
+        <Profile name="fs25_dynamicHallsBuildListItemImage" extends="baseReference" with="anchorTopCenter">
+            <size value="120px 120px"/>
+            <position value="-5px -20px"/>
+            <imageSize value="512 512"/>
+            <imageSliceId value="noSlice"/>
+        </Profile>
+        <Profile name="fs25_dynamicHallsBuildDetailsBoxBg" extends="baseReference" with="anchorBottomLeft">
+            <size value="410px 200px"/>
+            <imageColor value="$preset_fs25_colorGrey"/>
+        </Profile>
+        <Profile name="fs25_dynamicHallsBuildDetailsName" extends="fs25_textDefault" with="anchorMiddleCenter">
+            <position value="0px 20px"/>
+            <size value="340px 20px"/>
+            <textSize value="18px"/>
+            <textBold value="true"/>
+            <textAlignment value="center"/>
+            <textLayoutMode value="scrolling"/>
+            <textScrollOnFocusOnly value="false"/>
+        </Profile>
+    </GUIProfiles>
+</GUI>

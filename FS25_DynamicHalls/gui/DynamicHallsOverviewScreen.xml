@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<GUI onOpen="onOpen" onClose="onClose" onCreate="onCreate">
+    <Bitmap profile="fs25_fullScreenBackground"/>
+    <ThreePartBitmap profile="fs25_subCategoryContainerBg" position="125px 0px">
+        <Bitmap profile="fs25_subCategoryContainerArrow"/>
+        <GuiElement profile="fs25_dynamicHallsDetailsPanel">
+            <Text profile="fs25_dynamicHallsDetailsLabel" position="30px -30px" text="$l10n_dynamichalls_size"         id="sizeLabel"/>
+            <Text profile="fs25_dynamicHallsDetailsLabel" position="30px -70px" text="$l10n_dynamichalls_piecesPlaced" id="piecesPlacedLabel"/>
+        </GuiElement>
+    </ThreePartBitmap>
+    <Bitmap profile="fs25_tabListContainer"/>
+    <BoxLayout profile="fs25_dynamicHallsTabListBox">
+        <GuiElement profile="fs25_tabListItem" id="tabOverview">
+            <Button profile="fs25_dynamicHallsTabListItemButton" iconSliceId="gui.icon_construction_buildings"/>
+            <Bitmap profile="fs25_tabListItemSeparator"/>
+            <Bitmap profile="fs25_tabListItemSeparatorBottom"/>
+        </GuiElement>
+    </BoxLayout>
+    <GuiElement profile="fs25_menuContentContainer">
+        <GuiElement profile="fs25_menuHeaderPanel" position="63px 74px">
+            <Bitmap profile="fs25_menuHeaderIconBg">
+                <Bitmap profile="fs25_menuHeaderIcon" imageSliceId="gui.icon_construction_buildings"/>
+            </Bitmap>
+            <Text profile="fs25_menuHeaderTitle" text="$l10n_dynamichalls_overviewTitle"/>
+        </GuiElement>
+
+        <GuiElement profile="fs25_dynamicHallsContentPanel" id="contentPanel">
+            <GuiElement profile="fs25_dynamicHallsPieceListContainer" id="pieceListContainer">
+                <Bitmap profile="fs25_dynamicHallsPieceListHeader">
+                    <Text profile="fs25_dynamicHallsPieceListHeaderText"          position="20px 0px" text="$l10n_dynamichalls_piece"/>
+                    <Text profile="fs25_dynamicHallsPieceListHeaderTextQty"                           text="$l10n_dynamichalls_qty"/>
+                    <Text profile="fs25_dynamicHallsPieceListHeaderTextPrice"                         text="$l10n_dynamichalls_price"/>
+                    <Text profile="fs25_dynamicHallsPieceListHeaderTextMaterials"                     text="$l10n_dynamichalls_materials"/>
+                </Bitmap>
+                <SmoothList profile="fs25_dynamicHallsPieceList" id="pieceList">
+                    <ListItem profile="fs25_dynamicHallsPieceListItem">
+                        <Bitmap profile="fs25_dynamicHallsPieceListItemRow" name="rowBackground"/>
+                        <Text profile="fs25_dynamicHallsPieceListItemName"  name="pieceName"/>
+                        <Text profile="fs25_dynamicHallsPieceListItemQty"   name="qty"/>
+                        <Text profile="fs25_dynamicHallsPieceListItemPrice" name="price"/>
+                        <Bitmap profile="fs25_dynamicHallsPieceListItemMaterialIcon" name="materialIcon"/>
+                        <Text profile="fs25_dynamicHallsPieceListItemMaterialAmount" name="materialAmount"/>
+                    </ListItem>
+                </SmoothList>
+            </GuiElement>
+
+            <Bitmap profile="fs25_dynamicHallsMaterialsPanel" id="materialsPanel">
+                <Text profile="fs25_dynamicHallsPieceListTotalLabel" text="$l10n_dynamichalls_constructionMaterials"/>
+                <GuiElement profile="fs25_dynamicHallsMaterialsMarqueeClip" id="materialsMarqueeClip">
+                    <BoxLayout profile="fs25_dynamicHallsMaterialsMarqueeIconsBox" id="materialsMarqueeIconsBox">
+                        <Bitmap profile="fs25_dynamicHallsMarqueeIcon" id="materialsMarqueeIconTemplate" visible="false"/>
+                    </BoxLayout>
+                    <BoxLayout profile="fs25_dynamicHallsMaterialsMarqueeAmountsBox" id="materialsMarqueeAmountsBox">
+                        <Text profile="fs25_dynamicHallsMarqueeAmount" id="materialsMarqueeAmountTemplate" visible="false"/>
+                    </BoxLayout>
+                </GuiElement>
+            </Bitmap>
+            <Button profile="fs25_dynamicHallsConstructButton" position="0px 20px" text="$l10n_dynamichalls_construct" onClick="onClickConstruct" id="buttonConstruct"/>
+
+            <Bitmap profile="fs25_dynamicHallsPricePanel" id="pricePanel">
+                <Text profile="fs25_dynamicHallsPieceListTotalLabel" text="$l10n_dynamichalls_totalPrice"/>
+                <Text profile="fs25_dynamicHallsPieceListTotalPriceLarge" id="totalPriceText"/>
+            </Bitmap>
+            <Button profile="fs25_dynamicHallsBuyInstantlyButton" position="626px 20px" text="$l10n_dynamichalls_buyInstantly" onClick="onClickBuyInstantly" id="buttonBuyInstantly"/>
+        </GuiElement>
+    </GuiElement>
+
+    <BoxLayout profile="fs25_buttonBox" id="buttonsPanel">
+        <Button profile="buttonBack" onClick="onClickBack" text="$l10n_button_back"/>
+        <Button profile="buttonActivate" onClick="onClickOpenBuildMenu" text="$l10n_dynamichalls_openBuildMenu" id="openBuildMenuButton"/>
+    </BoxLayout>
+
+    <GUIProfiles>
+        <Profile name="fs25_dynamicHallsTabListBox" extends="emptyPanel" with="anchorStretchingYLeft pivotTopLeft">
+            <width value="125px"/>
+            <absoluteSizeOffset value="0px 40px"/>
+            <flowDirection value="vertical"/>
+            <alignmentY value="middle"/>
+        </Profile>
+        <Profile name="fs25_dynamicHallsTabListItemButton" extends="fs25_tabListItemButton">
+            <iconSize value="80px 80px"/>
+            <iconTextOffset value="-20px 0px"/>
+        </Profile>
+
+        <Profile name="fs25_dynamicHallsDetailsPanel" extends="emptyPanel" with="anchorStretchingYLeft">
+            <width value="410px"/>
+        </Profile>
+        <Profile name="fs25_dynamicHallsDetailsLabel" extends="fs25_textDefault" with="anchorTopLeft"/>
+
+        <Profile name="fs25_dynamicHallsContentPanel" extends="emptyPanel" with="anchorStretchingYStretchingX pivotTopLeft">
+            <position value="80px 0px"/>
+            <absoluteSizeOffset value="80px 0px"/>
+        </Profile>
+
+        <Profile name="fs25_dynamicHallsPieceListContainer" extends="emptyPanel" with="anchorStretchingYStretchingX pivotTopLeft">
+            <position value="0px -20px"/>
+            <absoluteSizeOffset value="0px 280px"/>
+        </Profile>
+        <Profile name="fs25_dynamicHallsPieceListHeader" extends="emptyPanel" with="anchorTopStretchingX">
+            <height value="40px"/>
+        </Profile>
+        <Profile name="fs25_dynamicHallsPieceListHeaderText" extends="fs25_textDefault" with="anchorMiddleLeft">
+            <textBold value="true"/>
+        </Profile>
+        <Profile name="fs25_dynamicHallsPieceListHeaderTextQty" extends="fs25_dynamicHallsPieceListHeaderText" with="anchorMiddleLeft">
+            <position value="493px 0px"/>
+        </Profile>
+        <Profile name="fs25_dynamicHallsPieceListHeaderTextPrice" extends="fs25_dynamicHallsPieceListHeaderText" with="anchorMiddleLeft">
+            <position value="740px 0px"/>
+        </Profile>
+        <Profile name="fs25_dynamicHallsPieceListHeaderTextMaterials" extends="fs25_dynamicHallsPieceListHeaderText" with="anchorMiddleLeft">
+            <position value="986px 0px"/>
+        </Profile>
+        <Profile name="fs25_dynamicHallsPieceList" extends="emptyPanel" with="anchorStretchingYStretchingX pivotTopLeft">
+            <position value="0px -40px"/>
+            <absoluteSizeOffset value="0px 40px"/>
+            <handleFocus value="false"/>
+        </Profile>
+        <Profile name="fs25_dynamicHallsPieceListItem" extends="emptyPanel" with="anchorTopStretchingX pivotTopLeft">
+            <height value="40px"/>
+        </Profile>
+        <Profile name="fs25_dynamicHallsPieceListItemRow" extends="baseReference" with="anchorStretchingYStretchingX">
+            <imageColor value="$preset_fs25_colorGrey"/>
+        </Profile>
+        <Profile name="fs25_dynamicHallsPieceListItemRowAlternate" extends="fs25_dynamicHallsPieceListItemRow">
+            <imageColor value="$preset_fs25_colorGreyDark_50"/>
+        </Profile>
+        <Profile name="fs25_dynamicHallsPieceListItemName" extends="fs25_textDefault" with="anchorMiddleLeft">
+            <position value="20px 0px"/>
+        </Profile>
+        <Profile name="fs25_dynamicHallsPieceListItemQty" extends="fs25_textDefault" with="anchorMiddleLeft">
+            <position value="493px 0px"/>
+        </Profile>
+        <Profile name="fs25_dynamicHallsPieceListItemPrice" extends="fs25_textDefault" with="anchorMiddleLeft">
+            <position value="740px 0px"/>
+            <format value="currency"/>
+            <formatDecimalPlaces value="0"/>
+        </Profile>
+        <Profile name="fs25_dynamicHallsMaterialIcon" extends="baseReference" with="anchorMiddleLeft">
+            <size value="30px 30px"/>
+            <imageSliceId value="noSlice"/>
+        </Profile>
+        <Profile name="fs25_dynamicHallsMaterialAmount" extends="fs25_textDefault" with="anchorMiddleLeft">
+            <position value="34px 0px"/>
+        </Profile>
+        <Profile name="fs25_dynamicHallsPieceListItemMaterialIcon" extends="fs25_dynamicHallsMaterialIcon" with="anchorMiddleLeft">
+            <position value="986px 0px"/>
+        </Profile>
+        <Profile name="fs25_dynamicHallsPieceListItemMaterialAmount" extends="fs25_dynamicHallsMaterialAmount" with="anchorMiddleLeft">
+            <position value="1020px 0px"/>
+        </Profile>
+
+        <Profile name="fs25_dynamicHallsMaterialsPanel" extends="baseReference" with="anchorBottomLeft pivotBottomLeft">
+            <position value="0px 70px"/>
+            <size value="606px 170px"/>
+            <imageColor value="$preset_fs25_colorGrey"/>
+        </Profile>
+        <Profile name="fs25_dynamicHallsPricePanel" extends="baseReference" with="anchorBottomLeft pivotBottomLeft">
+            <position value="626px 70px"/>
+            <size value="606px 170px"/>
+            <imageColor value="$preset_fs25_colorGrey"/>
+        </Profile>
+        <Profile name="fs25_dynamicHallsConstructButton" extends="buttonOK" with="anchorBottomLeft pivotBottomLeft">
+            <size value="606px 30px"/>
+            <inputAction value="MENU_EXTRA_2"/>
+        </Profile>
+        <Profile name="fs25_dynamicHallsBuyInstantlyButton" extends="buttonOK" with="anchorBottomLeft pivotBottomLeft">
+            <size value="606px 30px"/>
+            <inputAction value="MENU_EXTRA_1"/>
+        </Profile>
+        <Profile name="fs25_dynamicHallsPieceListTotalLabel" extends="fs25_dynamicHallsPieceListHeaderText" with="anchorTopLeft">
+            <position value="20px -15px"/>
+            <textSize value="18px"/>
+        </Profile>
+        <Profile name="fs25_dynamicHallsPieceListTotalPriceLarge" extends="fs25_dynamicHallsPieceListHeaderText" with="anchorMiddleCenter">
+            <textSize value="24px"/>
+            <textAlignment value="center"/>
+            <format value="currency"/>
+            <formatDecimalPlaces value="0"/>
+        </Profile>
+        <Profile name="fs25_dynamicHallsMaterialsMarqueeClip" extends="emptyPanel" with="anchorStretchingYStretchingX pivotTopLeft">
+            <position value="20px -40px"/>
+            <absoluteSizeOffset value="40px 60px"/>
+            <clipping value="true"/>
+        </Profile>
+        <Profile name="fs25_dynamicHallsMaterialsMarqueeIconsBox" extends="emptyPanel" with="anchorTopLeft pivotTopLeft">
+            <position value="0px -18px"/>
+            <size value="354px 50px"/>
+            <flowDirection value="horizontal"/>
+        </Profile>
+        <Profile name="fs25_dynamicHallsMaterialsMarqueeAmountsBox" extends="emptyPanel" with="anchorTopLeft pivotTopLeft">
+            <position value="0px -73px"/>
+            <size value="354px 20px"/>
+            <flowDirection value="horizontal"/>
+        </Profile>
+        <Profile name="fs25_dynamicHallsMarqueeIcon" extends="baseReference" with="anchorMiddleLeft">
+            <size value="50px 50px"/>
+            <imageSliceId value="noSlice"/>
+            <margin value="0px 0px 10px 0px"/>
+        </Profile>
+        <Profile name="fs25_dynamicHallsMarqueeAmount" extends="fs25_textDefault" with="anchorMiddleCenter">
+            <size value="50px 20px"/>
+            <textAlignment value="center"/>
+            <margin value="0px 0px 10px 0px"/>
+        </Profile>
+    </GUIProfiles>
+</GUI>

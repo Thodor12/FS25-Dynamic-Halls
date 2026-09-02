@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:simpleType name="g_string">
+        <xs:annotation>
+            <xs:appinfo>
+                <typeStr>String</typeStr>
+            </xs:appinfo>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="g_l10n_string">
+        <xs:annotation>
+            <xs:appinfo>
+                <typeStr>String or l10n key</typeStr>
+            </xs:appinfo>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="g_filename">
+        <xs:annotation>
+            <xs:appinfo>
+                <typeStr>Path to a certain file</typeStr>
+            </xs:appinfo>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="g_float">
+        <xs:annotation>
+            <xs:appinfo>
+                <typeStr>Float</typeStr>
+            </xs:appinfo>
+        </xs:annotation>
+        <xs:restriction base="xs:float"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="g_placementType">
+        <xs:annotation>
+            <xs:appinfo>
+                <typeStr>Piece placement type</typeStr>
+            </xs:appinfo>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="wall"/>
+            <xs:enumeration value="tile"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="g_category">
+        <xs:annotation>
+            <xs:appinfo>
+                <typeStr>Piece shop category</typeStr>
+            </xs:appinfo>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="wall"/>
+            <xs:enumeration value="roof"/>
+            <xs:enumeration value="floor"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:element name="piece">
+        <xs:complexType>
+            <xs:all>
+                <xs:element name="name" type="g_l10n_string" minOccurs="1">
+                    <xs:annotation>
+                        <xs:documentation xml:lang="en">Name of the piece</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element name="price" type="g_float" minOccurs="1">
+                    <xs:annotation>
+                        <xs:documentation xml:lang="en">Price of the piece</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element name="icon" type="g_filename" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation xml:lang="en">Path to the piece's shop icon image</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element name="category" type="g_category" minOccurs="1">
+                    <xs:annotation>
+                        <xs:documentation xml:lang="en">Shop category the piece is listed under (wall, roof, floor, ...)</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element name="materials" minOccurs="0" maxOccurs="1">
+                    <xs:annotation>
+                        <xs:documentation xml:lang="en">Materials required to construct the piece</xs:documentation>
+                    </xs:annotation>
+                    <xs:complexType>
+                        <xs:choice maxOccurs="unbounded">
+                            <xs:element name="material" minOccurs="0" maxOccurs="unbounded">
+                                <xs:complexType>
+                                    <xs:attribute name="fillType" type="g_string">
+                                        <xs:annotation>
+                                            <xs:documentation xml:lang="en">Fill type name</xs:documentation>
+                                        </xs:annotation>
+                                    </xs:attribute>
+                                    <xs:attribute name="amount" type="g_float">
+                                        <xs:annotation>
+                                            <xs:documentation xml:lang="en">Amount in liters</xs:documentation>
+                                        </xs:annotation>
+                                    </xs:attribute>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:choice>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="placementType" type="g_placementType" minOccurs="1">
+                    <xs:annotation>
+                        <xs:documentation xml:lang="en">How the piece is placed (wall or tile)</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element name="i3dFilename" type="g_filename" minOccurs="1">
+                    <xs:annotation>
+                        <xs:documentation xml:lang="en">Path to the piece's i3d file</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:all>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

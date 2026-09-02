@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<piece xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../Source/schema/piece.xsd">
+    <name>$l10n_piece_wallWindow</name>
+    <price>700</price>
+    <icon>placeables/baseplate/store_baseplate.dds</icon>
+    <category>wall</category>
+
+    <materials>
+        <material fillType="PLANKS" amount="2000" />
+    </materials>
+
+    <placementType>wall</placementType>
+    <i3dFilename>models/walls/wallWindow.i3d</i3dFilename>
+</piece>

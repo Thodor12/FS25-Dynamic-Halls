@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="no" ?>
 <placeable type="dynamicHallsPlaceable" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://validation.gdn.giants-software.com/xml/fs25/placeable.xsd">
     <storeData>
-        <name>$l10n_BASEPLATE_STORE_NAME</name>
+        <name>$l10n_storeItem_baseplate</name>
         <image>placeables/baseplate/store_baseplate.dds</image>
         <price>0</price>
         <dailyUpkeep>0</dailyUpkeep>
@@ -76,9 +76,6 @@
         <i3dMapping id="levelWidth" node="0>2|0|1" />
         <i3dMapping id="testAreaStart" node="0>3|0" />
         <i3dMapping id="testAreaEnd" node="0>3|0|0" />
-        <i3dMapping id="tileCorner" node="0>4|0" />
-        <i3dMapping id="tileCornerInverted" node="0>4|1" />
-        <i3dMapping id="tileHorizontal" node="0>4|2" />
-        <i3dMapping id="tileVertical" node="0>4|3" />
+        <i3dMapping id="warningStripe" node="0>4" />
     </i3dMappings>
 </placeable>

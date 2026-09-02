@@ -6,19 +6,11 @@
   </Asset>
 
   <Files>
-    <File fileId="3" filename="$data/shared/warningStripes_diffuse.dds"/>
-    <File fileId="4" filename="$data/shared/warningStripes_normal.dds"/>
-    <File fileId="5" filename="$data/shared/warningStripes_specular.dds"/>
   </Files>
 
 
   <Materials>
     <Material name="i3d_default_material" materialId="1" diffuseColor="0.8 0.8 0.8 1" specularColor="0.501961 1 0">
-    </Material>
-    <Material name="warningStripes_mat" materialId="2">
-      <Texture fileId="3"/>
-      <Normalmap fileId="4"/>
-      <Glossmap fileId="5"/>
     </Material>
   </Materials>
 
@@ -27,30 +19,25 @@
   </Shapes>
 
   <Scene>
-    <TransformGroup name="baseplateRoot" nodeId="10">
-      <TransformGroup name="collision" nodeId="11">
-        <Shape name="collisionFloor" shapeId="1" static="true" collisionFilterGroup="0x1034" collisionFilterMask="0xfffffbff" nodeId="12" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="1"/>
+    <TransformGroup name="baseplateRoot" nodeId="5">
+      <TransformGroup name="collision" nodeId="6">
+        <Shape name="collisionFloor" shapeId="1" static="true" collisionFilterGroup="0x1034" collisionFilterMask="0xfffffbff" nodeId="7" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="1"/>
       </TransformGroup>
-      <TransformGroup name="interaction" nodeId="13">
-        <Shape name="interactionTrigger" shapeId="2" static="true" trigger="true" collisionFilterGroup="0x20000000" collisionFilterMask="0x100000" nodeId="14" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="1"/>
+      <TransformGroup name="interaction" nodeId="8">
+        <Shape name="interactionTrigger" shapeId="2" static="true" trigger="true" collisionFilterGroup="0x20000000" collisionFilterMask="0x100000" nodeId="9" castsShadows="true" receiveShadows="true" nonRenderable="true" materialIds="1"/>
       </TransformGroup>
-      <TransformGroup name="leveling" nodeId="15">
-        <TransformGroup name="levelStart" nodeId="16">
-          <TransformGroup name="levelHeight" nodeId="17"/>
-          <TransformGroup name="levelWidth" nodeId="18"/>
+      <TransformGroup name="leveling" nodeId="10">
+        <TransformGroup name="levelStart" nodeId="11">
+          <TransformGroup name="levelHeight" nodeId="12"/>
+          <TransformGroup name="levelWidth" nodeId="13"/>
         </TransformGroup>
       </TransformGroup>
-      <TransformGroup name="testAreas" nodeId="19">
-        <TransformGroup name="testAreaStart" nodeId="20">
-          <TransformGroup name="testAreaEnd" nodeId="21"/>
+      <TransformGroup name="testAreas" nodeId="14">
+        <TransformGroup name="testAreaStart" nodeId="15">
+          <TransformGroup name="testAreaEnd" nodeId="16"/>
         </TransformGroup>
       </TransformGroup>
-      <TransformGroup name="warningStripe" nodeId="22">
-        <Shape name="tileCorner" shapeId="3" nodeId="23" castsShadows="true" receiveShadows="true" materialIds="2"/>
-        <Shape name="tileCornerInverted" shapeId="4" nodeId="24" castsShadows="true" receiveShadows="true" materialIds="2"/>
-        <Shape name="tileHorizontal" shapeId="5" nodeId="25" castsShadows="true" receiveShadows="true" materialIds="2"/>
-        <Shape name="tileVertical" shapeId="6" nodeId="26" castsShadows="true" receiveShadows="true" materialIds="2"/>
-      </TransformGroup>
+      <TransformGroup name="warningStripe" nodeId="17"/>
     </TransformGroup>
   </Scene>
 

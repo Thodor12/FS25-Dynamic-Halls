@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<l10n xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://validation.gdn.giants-software.com/xml/fs25/l18n.xsd">
+    <elements>
+        <e k="storeItem_baseplate"                v="Baseplate"/>
+        <e k="piece_wallBasic"                    v="Wall Section (Basic)"/>
+        <e k="piece_wallWindow"                   v="Wall Section (Window)"/>
+        <e k="piece_floorBasic"                   v="Floor Section (Basic)"/>
+        <e k="dynamichalls_openMenu"              v="Open menu"/>
+        <e k="dynamichalls_overviewTitle"         v="Dynamic Halls"/>
+        <e k="dynamichalls_size"                  v="Size"/>
+        <e k="dynamichalls_piecesPlaced"          v="Pieces placed"/>
+        <e k="dynamichalls_piece"                 v="Piece"/>
+        <e k="dynamichalls_qty"                   v="Quantity"/>
+        <e k="dynamichalls_price"                 v="Price"/>
+        <e k="dynamichalls_materials"             v="Materials"/>
+        <e k="dynamichalls_total"                 v="Total"/>
+        <e k="dynamichalls_constructionMaterials" v="Construction Materials"/>
+        <e k="dynamichalls_totalPrice"            v="Total Price"/>
+        <e k="dynamichalls_openBuildMenu"         v="Open Build Menu"/>
+        <e k="dynamichalls_buyInstantly"          v="Buy Instantly"/>
+        <e k="dynamichalls_construct"             v="Construct"/>
+        <e k="dynamichalls_categoryWalls"         v="Walls"/>
+        <e k="dynamichalls_categoryRoofs"         v="Roofs"/>
+        <e k="dynamichalls_categoryFloors"        v="Floors"/>
+        <e k="dynamichalls_placementTypeWall"     v="Edge placement"/>
+        <e k="dynamichalls_placementTypeTile"     v="Grid placement"/>
+    </elements>
+</l10n>

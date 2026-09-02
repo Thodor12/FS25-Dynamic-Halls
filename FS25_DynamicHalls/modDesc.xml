@@ -12,33 +12,38 @@
             groundwork.</en>
     </description>
 
+    <l10n filenamePrefix="l10n/locale"/>
+
     <iconFilename>icon_dynamicHalls.dds</iconFilename>
 
     <multiplayer supported="false"/>
-
-    <extraSourceFiles>
-        <sourceFile filename="scripts/Constants.lua"/>
-        <sourceFile filename="scripts/AreaMarkers.lua"/>
-        <sourceFile filename="scripts/WarningStripe.lua"/>
-    </extraSourceFiles>
 
     <storeItems>
         <storeItem xmlFilename="placeables/baseplate/baseplate.xml"/>
     </storeItems>
 
-    <l10n>
-        <text name="BASEPLATE_STORE_NAME">
-            <en>Baseplate</en>
-        </text>
-    </l10n>
-
-    <placeableSpecializations>
-        <specialization name="dynamicHallsPlaceable" className="DynamicHallsPlaceable" filename="scripts/Placeable.lua"/>
-    </placeableSpecializations>
+    <extraSourceFiles>
+        <sourceFile filename="scripts/Constants.lua"/>
+        <sourceFile filename="scripts/Utils.lua"/>
+        <sourceFile filename="scripts/AreaMarkers.lua"/>
+        <sourceFile filename="scripts/InteractionTriggerActivatable.lua"/>
+        <sourceFile filename="scripts/WarningStripe.lua"/>
+        <sourceFile filename="scripts/pieces/PieceDefinition.lua"/>
+        <sourceFile filename="scripts/pieces/PieceDefinitionManager.lua"/>
+        <sourceFile filename="scripts/pieces/PlacedWallPiece.lua"/>
+        <sourceFile filename="scripts/pieces/PlacedTilePiece.lua"/>
+        <sourceFile filename="scripts/gui/DynamicHallsOverviewScreen.lua"/>
+        <sourceFile filename="scripts/gui/DynamicHallsBuildScreen.lua"/>
+        <sourceFile filename="scripts/gui/DynamicHallsGui.lua"/>
+    </extraSourceFiles>
 
     <placeableTypes>
         <type name="dynamicHallsPlaceable" parent="simplePlaceable" className="Placeable" filename="$dataS/scripts/placeables/Placeable.lua">
             <specialization name="dynamicHallsPlaceable"/>
         </type>
     </placeableTypes>
+
+    <placeableSpecializations>
+        <specialization name="dynamicHallsPlaceable" className="DynamicHallsPlaceable" filename="scripts/Placeable.lua"/>
+    </placeableSpecializations>
 </modDesc>
