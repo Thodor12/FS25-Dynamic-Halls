@@ -1,3 +1,4 @@
+-- The build screen: lets the player browse pieces and place them on the current baseplate.
 DynamicHallsBuildScreen = {}
 local DynamicHallsBuildScreen_mt = Class(DynamicHallsBuildScreen, ScreenElement)
 
@@ -89,13 +90,15 @@ function DynamicHallsBuildScreen:setCurrentSubCategory(index)
 
     local category = DynamicHallsConstants.PIECE_CATEGORIES[index].value
     self.items = {}
-    for _, piece in pairs(g_dynamicHallsPieceDefinitionManager:getPieces()) do
-        if piece.category == category then
-            table.insert(self.items, piece)
+    for packKey, pack in pairs(g_dynamicHallsPackDefinitionManager:getPacks()) do
+        for _, piece in pairs(pack.pieces) do
+            if piece.category == category then
+                table.insert(self.items, { packKey = packKey, piece = piece })
+            end
         end
     end
     table.sort(self.items, function(a, b)
-        return a.name < b.name
+        return a.piece.name < b.piece.name
     end)
 
     self.itemList:reloadData()
@@ -126,7 +129,7 @@ end
 -- @param table cell the cell element to populate
 function DynamicHallsBuildScreen:populateCellForItemInSection(list, section, index, cell)
     local item = self.items[index]
-    cell:getAttribute("icon"):setImageFilename(item.icon)
+    cell:getAttribute("icon"):setImageFilename(item.piece.icon)
 end
 
 ---Handles the item list's selection changing.
@@ -138,10 +141,10 @@ function DynamicHallsBuildScreen:onListSelectionChanged(list, section, index)
 end
 
 ---Sets the currently selected item and updates the details box.
--- @param table item the selected piece definition, or nil for none
+-- @param table item the selected { packKey, piece } entry, or nil for none
 function DynamicHallsBuildScreen:setSelectedItem(item)
     self.selectedItem = item
-    self.itemDetailsName:setText(item ~= nil and item.name or "")
+    self.itemDetailsName:setText(item ~= nil and item.piece.name or "")
 end
 
 ---Handles clicking an item in the list.

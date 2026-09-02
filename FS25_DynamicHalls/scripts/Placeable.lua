@@ -1,5 +1,5 @@
 -- The DynamicHallsPlaceable specialization for the baseplate placeable. Reads the player's chosen
--- width/length configuration and delegates to DynamicHallsAreaMarkers/DynamicHallsWarningStripe
+-- width/length configuration and delegates to DynamicHallsAreaMarkers/DynamicHallsWarningStripePlacement
 -- for the actual area-marker and visual setup.
 DynamicHallsPlaceable = {}
 
@@ -49,7 +49,7 @@ end
 -- @param table schema XMLSchema to register into
 -- @param string basePath xml path prefix
 function DynamicHallsPlaceable.registerSavegameXMLPaths(schema, basePath)
-    DynamicHallsPlacedWallPiece.registerSavegameXMLPaths(schema, basePath .. ".wallPieces.wallPiece(?)")
+    DynamicHallsPlacedEdgePiece.registerSavegameXMLPaths(schema, basePath .. ".edgePieces.edgePiece(?)")
     DynamicHallsPlacedTilePiece.registerSavegameXMLPaths(schema, basePath .. ".tilePieces.tilePiece(?)")
 end
 
@@ -75,23 +75,23 @@ function DynamicHallsPlaceable:onLoad(savegame)
     DynamicHallsAreaMarkers.repositionCollisionFloor(self, spec.width, spec.length)
     DynamicHallsAreaMarkers.repositionInteractionTrigger(self, spec.width, spec.length)
 
-    DynamicHallsWarningStripe.build(self, spec.width, spec.length)
+    DynamicHallsWarningStripePlacement.build(self, spec.width, spec.length)
 
     self.interactionTriggerActivatable = DynamicHallsInteractionTriggerActivatable.new(self)
 
-    spec.wallPieces = {}
+    spec.edgePieces = {}
     spec.tilePieces = {}
 end
 
----Writes the placed wall/tile pieces to the savegame.
+---Writes the placed edge/tile pieces to the savegame.
 -- @param table xmlFile XMLFile to write to
 -- @param string key xml path to this specialization's savegame element
 -- @param table usedModNames set of mod names referenced by the savegame
 function DynamicHallsPlaceable:saveToXMLFile(xmlFile, key, usedModNames)
     local spec = self["spec_FS25_DynamicHalls.dynamicHallsPlaceable"]
 
-    for i, wallPiece in ipairs(spec.wallPieces) do
-        wallPiece:saveToXMLFile(xmlFile, string.format("%s.wallPieces.wallPiece(%d)", key, i - 1))
+    for i, edgePiece in ipairs(spec.edgePieces) do
+        edgePiece:saveToXMLFile(xmlFile, string.format("%s.edgePieces.edgePiece(%d)", key, i - 1))
     end
 
     for i, tilePiece in ipairs(spec.tilePieces) do
@@ -99,17 +99,17 @@ function DynamicHallsPlaceable:saveToXMLFile(xmlFile, key, usedModNames)
     end
 end
 
----Reads the placed wall/tile pieces back from the savegame.
+---Reads the placed edge/tile pieces back from the savegame.
 -- @param table xmlFile XMLFile to read from
 -- @param string key xml path to this specialization's savegame element
 -- @param bool resetVehicles whether vehicles are being reset on load
 function DynamicHallsPlaceable:loadFromXMLFile(xmlFile, key, resetVehicles)
     local spec = self["spec_FS25_DynamicHalls.dynamicHallsPlaceable"]
 
-    for _, wallPieceKey in xmlFile:iterator(key .. ".wallPieces.wallPiece") do
-        local wallPiece = DynamicHallsPlacedWallPiece.new()
-        if wallPiece:loadFromXMLFile(xmlFile, wallPieceKey) then
-            table.insert(spec.wallPieces, wallPiece)
+    for _, edgePieceKey in xmlFile:iterator(key .. ".edgePieces.edgePiece") do
+        local edgePiece = DynamicHallsPlacedEdgePiece.new()
+        if edgePiece:loadFromXMLFile(xmlFile, edgePieceKey) then
+            table.insert(spec.edgePieces, edgePiece)
         end
     end
 
@@ -131,28 +131,36 @@ function DynamicHallsPlaceable:onFinalizePlacement()
     -- TODO: test-only seed data to verify save/load, remove once confirmed working. Overwrites on
     -- every load for now so it's easy to tweak while iterating.
     local spec = self["spec_FS25_DynamicHalls.dynamicHallsPlaceable"]
-    spec.wallPieces = {}
+    spec.edgePieces = {}
     spec.tilePieces = {}
 
-    local testWallPiece = DynamicHallsPlacedWallPiece.new()
-    testWallPiece.pieceKey = "wallBasic"
+    local testWallPiece = DynamicHallsPlacedEdgePiece.new()
+    testWallPiece.packKey = "wooden"
+    testWallPiece.pieceKey = "wallStraight1"
     testWallPiece.row = 0
     testWallPiece.column = 0
-    testWallPiece.direction = DynamicHallsPlacedWallPiece.DIRECTION_HORIZONTAL
-    table.insert(spec.wallPieces, testWallPiece)
+    testWallPiece.rotation = 0
+    table.insert(spec.edgePieces, testWallPiece)
 
-    local testWindowPiece = DynamicHallsPlacedWallPiece.new()
-    testWindowPiece.pieceKey = "wallWindow"
+    local testWindowPiece = DynamicHallsPlacedEdgePiece.new()
+    testWindowPiece.packKey = "wooden"
+    testWindowPiece.pieceKey = "wallStraightWindow1"
     testWindowPiece.row = 0
     testWindowPiece.column = 1
-    testWindowPiece.direction = DynamicHallsPlacedWallPiece.DIRECTION_HORIZONTAL
-    table.insert(spec.wallPieces, testWindowPiece)
+    testWindowPiece.rotation = 0
+    table.insert(spec.edgePieces, testWindowPiece)
 
     local testTilePiece = DynamicHallsPlacedTilePiece.new()
-    testTilePiece.pieceKey = "floorBasic"
+    testTilePiece.packKey = "wooden"
+    testTilePiece.pieceKey = "floor1x1"
     testTilePiece.row = 0
     testTilePiece.column = 0
     table.insert(spec.tilePieces, testTilePiece)
+
+    -- TODO: move this call back up to onLoad (alongside DynamicHallsWarningStripePlacement.build) once real
+    -- savegame-driven loading replaces this test seed data - spec.edgePieces/tilePieces aren't
+    -- actually populated yet at onLoad time otherwise.
+    DynamicHallsPiecePlacement.build(self)
 end
 
 ---Removes the interaction trigger.

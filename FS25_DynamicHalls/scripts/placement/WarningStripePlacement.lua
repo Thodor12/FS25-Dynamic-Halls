@@ -1,11 +1,11 @@
 -- Builds the yellow/black warning-stripe border tiles around a baseplate's footprint.
-DynamicHallsWarningStripe = {}
+DynamicHallsWarningStripePlacement = {}
 
 ---Loads the 4 tile shapes and places them around a footprint of the given size.
 -- @param table placeable the placeable instance
 -- @param float width footprint width in meters
 -- @param float length footprint length in meters
-function DynamicHallsWarningStripe.build(placeable, width, length)
+function DynamicHallsWarningStripePlacement.build(placeable, width, length)
     local rootNodeMapping = placeable.i3dMappings["warningStripe"]
     if rootNodeMapping == nil then
         return
@@ -28,10 +28,10 @@ function DynamicHallsWarningStripe.build(placeable, width, length)
             end, nil, filename)
     end
 
-    load("models/warningStripe/tileHorizontal.i3d", DynamicHallsWarningStripe.placeHorizontalTiles)
-    load("models/warningStripe/tileVertical.i3d", DynamicHallsWarningStripe.placeVerticalTiles)
-    load("models/warningStripe/tileCorner.i3d", DynamicHallsWarningStripe.placeCornerTiles)
-    load("models/warningStripe/tileCornerInverted.i3d", DynamicHallsWarningStripe.placeCornerInvertedTiles)
+    load("models/warningStripe/tileHorizontal.i3d", DynamicHallsWarningStripePlacement.placeHorizontalTiles)
+    load("models/warningStripe/tileVertical.i3d", DynamicHallsWarningStripePlacement.placeVerticalTiles)
+    load("models/warningStripe/tileCorner.i3d", DynamicHallsWarningStripePlacement.placeCornerTiles)
+    load("models/warningStripe/tileCornerInverted.i3d", DynamicHallsWarningStripePlacement.placeCornerInvertedTiles)
 end
 
 ---Clones templateNodeId and places the clone at the given position/rotation.
@@ -55,7 +55,7 @@ end
 -- @param integer rootNodeId node to link the tiles under
 -- @param float width footprint width in meters
 -- @param float length footprint length in meters
-function DynamicHallsWarningStripe.placeHorizontalTiles(templateNodeId, rootNodeId, width, length)
+function DynamicHallsWarningStripePlacement.placeHorizontalTiles(templateNodeId, rootNodeId, width, length)
     local halfLength = length / 2
     local outerHalfLength = halfLength + DynamicHallsConstants.WARNING_STRIPE_THICKNESS / 2
     local numTiles = width / DynamicHallsConstants.WARNING_STRIPE_TILE_LENGTH
@@ -73,7 +73,7 @@ end
 -- @param integer rootNodeId node to link the tiles under
 -- @param float width footprint width in meters
 -- @param float length footprint length in meters
-function DynamicHallsWarningStripe.placeVerticalTiles(templateNodeId, rootNodeId, width, length)
+function DynamicHallsWarningStripePlacement.placeVerticalTiles(templateNodeId, rootNodeId, width, length)
     local halfWidth = width / 2
     local outerHalfWidth = halfWidth + DynamicHallsConstants.WARNING_STRIPE_THICKNESS / 2
     local numTiles = length / DynamicHallsConstants.WARNING_STRIPE_TILE_LENGTH
@@ -91,7 +91,7 @@ end
 -- @param integer rootNodeId node to link the tiles under
 -- @param float width footprint width in meters
 -- @param float length footprint length in meters
-function DynamicHallsWarningStripe.placeCornerTiles(templateNodeId, rootNodeId, width, length)
+function DynamicHallsWarningStripePlacement.placeCornerTiles(templateNodeId, rootNodeId, width, length)
     local outerHalfWidth = width / 2 + DynamicHallsConstants.WARNING_STRIPE_THICKNESS / 2
     local outerHalfLength = length / 2 + DynamicHallsConstants.WARNING_STRIPE_THICKNESS / 2
 
@@ -104,7 +104,7 @@ end
 -- @param integer rootNodeId node to link the tiles under
 -- @param float width footprint width in meters
 -- @param float length footprint length in meters
-function DynamicHallsWarningStripe.placeCornerInvertedTiles(templateNodeId, rootNodeId, width, length)
+function DynamicHallsWarningStripePlacement.placeCornerInvertedTiles(templateNodeId, rootNodeId, width, length)
     local outerHalfWidth = width / 2 + DynamicHallsConstants.WARNING_STRIPE_THICKNESS / 2
     local outerHalfLength = length / 2 + DynamicHallsConstants.WARNING_STRIPE_THICKNESS / 2
 

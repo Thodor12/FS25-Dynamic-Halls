@@ -1,3 +1,4 @@
+-- The overview screen: shows a baseplate's placed pieces, total cost, and materials needed.
 DynamicHallsOverviewScreen = {}
 local DynamicHallsOverviewScreen_mt = Class(DynamicHallsOverviewScreen, ScreenElement)
 
@@ -48,12 +49,21 @@ end
 function DynamicHallsOverviewScreen:updatePieceSummary()
     local spec = self.placeable["spec_FS25_DynamicHalls.dynamicHallsPlaceable"]
 
-    local countsByPieceKey = {}
-    for _, placedPiece in ipairs(spec.wallPieces) do
-        countsByPieceKey[placedPiece.pieceKey] = (countsByPieceKey[placedPiece.pieceKey] or 0) + 1
+    local countsByPiece = {}
+    local function countPiece(placedPiece)
+        local combinedKey = placedPiece.packKey .. "." .. placedPiece.pieceKey
+        local entry = countsByPiece[combinedKey]
+        if entry == nil then
+            entry = { packKey = placedPiece.packKey, pieceKey = placedPiece.pieceKey, qty = 0 }
+            countsByPiece[combinedKey] = entry
+        end
+        entry.qty = entry.qty + 1
+    end
+    for _, placedPiece in ipairs(spec.edgePieces) do
+        countPiece(placedPiece)
     end
     for _, placedPiece in ipairs(spec.tilePieces) do
-        countsByPieceKey[placedPiece.pieceKey] = (countsByPieceKey[placedPiece.pieceKey] or 0) + 1
+        countPiece(placedPiece)
     end
 
     self.pieceRows = {}
@@ -61,8 +71,9 @@ function DynamicHallsOverviewScreen:updatePieceSummary()
 
     local totalAmountByFillType = {}
     local isAlternateGroup = false
-    for pieceKey, qty in pairs(countsByPieceKey) do
-        local pieceDefinition = g_dynamicHallsPieceDefinitionManager:getPieceByKey(pieceKey)
+    for _, entry in pairs(countsByPiece) do
+        local qty = entry.qty
+        local pieceDefinition = g_dynamicHallsPackDefinitionManager:getPieceByKey(entry.packKey, entry.pieceKey)
         if pieceDefinition ~= nil then
             local price = pieceDefinition.price * qty
             self.totalPrice = self.totalPrice + price

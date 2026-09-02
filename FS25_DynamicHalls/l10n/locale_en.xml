@@ -2,6 +2,7 @@
 <l10n xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://validation.gdn.giants-software.com/xml/fs25/l18n.xsd">
     <elements>
         <e k="storeItem_baseplate"                v="Baseplate"/>
+        <e k="pack_wooden"                        v="Wooden"/>
         <e k="piece_wallBasic"                    v="Wall Section (Basic)"/>
         <e k="piece_wallWindow"                   v="Wall Section (Window)"/>
         <e k="piece_floorBasic"                   v="Floor Section (Basic)"/>
@@ -22,7 +23,5 @@
         <e k="dynamichalls_categoryWalls"         v="Walls"/>
         <e k="dynamichalls_categoryRoofs"         v="Roofs"/>
         <e k="dynamichalls_categoryFloors"        v="Floors"/>
-        <e k="dynamichalls_placementTypeWall"     v="Edge placement"/>
-        <e k="dynamichalls_placementTypeTile"     v="Grid placement"/>
     </elements>
 </l10n>

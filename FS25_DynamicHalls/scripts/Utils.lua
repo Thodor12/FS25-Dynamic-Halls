@@ -1,3 +1,4 @@
+-- Project-wide helper functions, not specific to any one subsystem.
 DynamicHallsUtils = {}
 
 ---Finds the entry in list (an array of tables each having a value field) whose value matches, or

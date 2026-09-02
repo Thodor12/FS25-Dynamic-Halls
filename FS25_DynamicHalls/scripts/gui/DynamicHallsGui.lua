@@ -1,3 +1,4 @@
+-- Mod entry point: loads this mod's GUI screens when the map loads.
 DynamicHallsGui = {}
 
 ---Loads the overview and build screens.

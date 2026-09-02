@@ -32,12 +32,13 @@
           <TransformGroup name="levelWidth" nodeId="13"/>
         </TransformGroup>
       </TransformGroup>
-      <TransformGroup name="testAreas" nodeId="14">
-        <TransformGroup name="testAreaStart" nodeId="15">
-          <TransformGroup name="testAreaEnd" nodeId="16"/>
+      <TransformGroup name="pieces" nodeId="14"/>
+      <TransformGroup name="testAreas" nodeId="15">
+        <TransformGroup name="testAreaStart" nodeId="16">
+          <TransformGroup name="testAreaEnd" nodeId="17"/>
         </TransformGroup>
       </TransformGroup>
-      <TransformGroup name="warningStripe" nodeId="17"/>
+      <TransformGroup name="warningStripe" nodeId="18"/>
     </TransformGroup>
   </Scene>
 

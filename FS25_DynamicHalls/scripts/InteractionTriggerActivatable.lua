@@ -1,3 +1,4 @@
+-- Activatable-objects-system entry for a baseplate's "open menu" interaction trigger.
 DynamicHallsInteractionTriggerActivatable = {}
 local DynamicHallsInteractionTriggerActivatable_mt = Class(DynamicHallsInteractionTriggerActivatable)
 

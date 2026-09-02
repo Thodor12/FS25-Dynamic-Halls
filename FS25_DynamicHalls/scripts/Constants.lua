@@ -52,8 +52,5 @@ DynamicHallsConstants.PIECE_CATEGORIES = {
     { value = "roof",  titleKey = "dynamichalls_categoryRoofs" },
 }
 
--- Valid piece placement types, in display order.
-DynamicHallsConstants.PIECE_PLACEMENT_TYPES = {
-    { value = "wall", titleKey = "dynamichalls_placementTypeWall" },
-    { value = "tile", titleKey = "dynamichalls_placementTypeTile" },
-}
+-- Size (X/Z) of one placement grid cell, in meters.
+DynamicHallsConstants.PIECE_CELL_SIZE = 1

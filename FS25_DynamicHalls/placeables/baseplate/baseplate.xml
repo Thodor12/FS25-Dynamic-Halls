@@ -74,8 +74,9 @@
         <i3dMapping id="levelStart" node="0>2|0" />
         <i3dMapping id="levelHeight" node="0>2|0|0" />
         <i3dMapping id="levelWidth" node="0>2|0|1" />
-        <i3dMapping id="testAreaStart" node="0>3|0" />
-        <i3dMapping id="testAreaEnd" node="0>3|0|0" />
-        <i3dMapping id="warningStripe" node="0>4" />
+        <i3dMapping id="pieces" node="0>3" />
+        <i3dMapping id="testAreaStart" node="0>4|0" />
+        <i3dMapping id="testAreaEnd" node="0>4|0|0" />
+        <i3dMapping id="warningStripe" node="0>5" />
     </i3dMappings>
 </placeable>

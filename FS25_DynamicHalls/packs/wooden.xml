@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<pack xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../Source/schema/pack.xsd">
+    <name>$l10n_pack_wooden</name>
+
+    <pieces>
+        <piece id="wallStraight1">
+            <name>$l10n_piece_wallBasic</name>
+            <price>500</price>
+            <icon>placeables/baseplate/store_baseplate.dds</icon>
+            <category>wall</category>
+
+            <materials>
+                <material fillType="PLANKS"       amount="2500"/>
+                <material fillType="CEMENTBRICKS" amount="500"/>
+            </materials>
+
+            <placement>
+                <edge>
+                    <length>1</length>
+                </edge>
+            </placement>
+            <i3dFilename>models/packs/wooden/walls/wallStraight1.i3d</i3dFilename>
+        </piece>
+
+        <piece id="wallStraightWindow1">
+            <name>$l10n_piece_wallWindow</name>
+            <price>700</price>
+            <icon>placeables/baseplate/store_baseplate.dds</icon>
+            <category>wall</category>
+
+            <materials>
+                <material fillType="PLANKS" amount="2000"/>
+            </materials>
+
+            <placement>
+                <edge>
+                    <length>1</length>
+                </edge>
+            </placement>
+            <i3dFilename>models/packs/wooden/walls/wallStraightWindow1.i3d</i3dFilename>
+        </piece>
+
+        <piece id="floor1x1">
+            <name>$l10n_piece_floorBasic</name>
+            <price>400</price>
+            <icon>placeables/baseplate/store_baseplate.dds</icon>
+            <category>floor</category>
+
+            <materials>
+                <material fillType="CEMENTBRICKS" amount="1500"/>
+            </materials>
+
+            <placement>
+                <tile>
+                    <width>1</width>
+                    <depth>1</depth>
+                </tile>
+            </placement>
+            <i3dFilename>models/packs/wooden/floors/floor1x1.i3d</i3dFilename>
+        </piece>
+    </pieces>
+</pack>

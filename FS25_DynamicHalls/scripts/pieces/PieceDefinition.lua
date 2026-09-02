@@ -1,10 +1,12 @@
+-- One piece's shop/material/placement data, as defined inside its pack's xml file.
 DynamicHallsPieceDefinition = {}
 local DynamicHallsPieceDefinition_mt = Class(DynamicHallsPieceDefinition)
 
----Registers the xml schema for a piece definition file under basePath.
+---Registers the xml schema for a piece definition under basePath.
 -- @param table schema XMLSchema to register into
 -- @param string basePath xml path prefix
 function DynamicHallsPieceDefinition.registerXMLPaths(schema, basePath)
+    schema:register(XMLValueType.STRING, basePath .. "#id", "Piece id, unique within its pack")
     schema:register(XMLValueType.L10N_STRING, basePath .. ".name", "Name of the piece")
     schema:register(XMLValueType.FLOAT, basePath .. ".price", "Price of the piece")
     schema:register(XMLValueType.FILENAME, basePath .. ".icon", "Path to the piece's shop icon image")
@@ -12,7 +14,8 @@ function DynamicHallsPieceDefinition.registerXMLPaths(schema, basePath)
         "Shop category the piece is listed under (wall, roof, floor, ...)")
     schema:register(XMLValueType.STRING, basePath .. ".materials.material(?)#fillType", "Fill type name")
     schema:register(XMLValueType.FLOAT, basePath .. ".materials.material(?)#amount", "Amount in liters")
-    schema:register(XMLValueType.STRING, basePath .. ".placementType", "How the piece is placed (wall or tile)")
+    DynamicHallsEdgePiecePlacementType.registerXMLPaths(schema, basePath .. ".placement.edge")
+    DynamicHallsTilePiecePlacementType.registerXMLPaths(schema, basePath .. ".placement.tile")
     schema:register(XMLValueType.FILENAME, basePath .. ".i3dFilename", "Path to the piece's i3d file")
 end
 
@@ -26,7 +29,7 @@ function DynamicHallsPieceDefinition.new(customMt)
     self.icon = nil
     self.category = nil
     self.materials = {}
-    self.placementType = nil
+    self.placement = nil
     self.i3dFilename = nil
     return self
 end
@@ -37,6 +40,12 @@ end
 -- @param string baseDirectory base directory for resolving filename fields
 -- @param table customEnvironment l10n environment for resolving the name field
 function DynamicHallsPieceDefinition:loadFromXMLFile(xmlFile, key, baseDirectory, customEnvironment)
+    self.key = xmlFile:getValue(key .. "#id")
+    if self.key == nil then
+        Logging.xmlWarning(xmlFile, "Missing id in '%s'", key)
+        return false
+    end
+
     self.name = xmlFile:getValue(key .. ".name", nil, customEnvironment)
     self.price = xmlFile:getValue(key .. ".price", self.price)
     self.icon = xmlFile:getValue(key .. ".icon", nil, baseDirectory)
@@ -63,9 +72,14 @@ function DynamicHallsPieceDefinition:loadFromXMLFile(xmlFile, key, baseDirectory
         return a.fillType.name < b.fillType.name
     end)
 
-    self.placementType = xmlFile:getValue(key .. ".placementType")
-    if DynamicHallsUtils.findByValue(DynamicHallsConstants.PIECE_PLACEMENT_TYPES, self.placementType) == nil then
-        Logging.xmlWarning(xmlFile, "Unknown placementType '%s' in '%s'", self.placementType, key)
+    if xmlFile:getValue(key .. ".placement.edge.length") ~= nil then
+        self.placement = DynamicHallsEdgePiecePlacementType.new()
+        self.placement:loadFromXMLFile(xmlFile, key .. ".placement.edge")
+    elseif xmlFile:getValue(key .. ".placement.tile.width") ~= nil then
+        self.placement = DynamicHallsTilePiecePlacementType.new()
+        self.placement:loadFromXMLFile(xmlFile, key .. ".placement.tile")
+    else
+        Logging.xmlWarning(xmlFile, "Missing placement.edge or placement.tile in '%s'", key)
         return false
     end
 
