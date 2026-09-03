@@ -121,45 +121,13 @@ function DynamicHallsPlaceable:loadFromXMLFile(xmlFile, key, resetVehicles)
     end
 end
 
----Registers the interaction trigger callback once placement is finalized.
+---Registers the interaction trigger callback and spawns the placeable's saved pieces.
 function DynamicHallsPlaceable:onFinalizePlacement()
     local interactionTriggerMapping = self.i3dMappings["interactionTrigger"]
     if interactionTriggerMapping ~= nil then
         addTrigger(interactionTriggerMapping.nodeId, "onInteractionTriggerCallback", self)
     end
 
-    -- TODO: test-only seed data to verify save/load, remove once confirmed working. Overwrites on
-    -- every load for now so it's easy to tweak while iterating.
-    local spec = self["spec_FS25_DynamicHalls.dynamicHallsPlaceable"]
-    spec.edgePieces = {}
-    spec.tilePieces = {}
-
-    local testWallPiece = DynamicHallsPlacedEdgePiece.new()
-    testWallPiece.packKey = "wooden"
-    testWallPiece.pieceKey = "wallStraight1"
-    testWallPiece.row = 0
-    testWallPiece.column = 0
-    testWallPiece.rotation = 0
-    table.insert(spec.edgePieces, testWallPiece)
-
-    local testWindowPiece = DynamicHallsPlacedEdgePiece.new()
-    testWindowPiece.packKey = "wooden"
-    testWindowPiece.pieceKey = "wallStraightWindow1"
-    testWindowPiece.row = 0
-    testWindowPiece.column = 1
-    testWindowPiece.rotation = 0
-    table.insert(spec.edgePieces, testWindowPiece)
-
-    local testTilePiece = DynamicHallsPlacedTilePiece.new()
-    testTilePiece.packKey = "wooden"
-    testTilePiece.pieceKey = "floor1x1"
-    testTilePiece.row = 0
-    testTilePiece.column = 0
-    table.insert(spec.tilePieces, testTilePiece)
-
-    -- TODO: move this call back up to onLoad (alongside DynamicHallsWarningStripePlacement.build) once real
-    -- savegame-driven loading replaces this test seed data - spec.edgePieces/tilePieces aren't
-    -- actually populated yet at onLoad time otherwise.
     DynamicHallsPiecePlacement.build(self)
 end
 

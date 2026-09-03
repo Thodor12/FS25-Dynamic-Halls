@@ -42,12 +42,33 @@ function DynamicHallsPiecePlacement.spawn(placeable, placedPiece)
         return
     end
 
+    DynamicHallsPiecePlacement.getOrLoadTemplateNodeId(placeable, placedPiece.packKey, pieceDefinition,
+        function(templateNodeId)
+            DynamicHallsPiecePlacement.placeClone(pieceDefinition, templateNodeId, rootNodeId, placeable, placedPiece)
+        end)
+end
+
+---Calls callback(templateNodeId) with pieceDefinition's clone-source template node, loading it
+-- the first time that piece type is needed on this placeable and reusing it for every later call.
+-- Never calls callback if the load fails.
+-- @param table placeable the placeable instance
+-- @param string packKey pack key pieceDefinition belongs to
+-- @param table pieceDefinition the piece whose template to get/load
+-- @param function callback function(templateNodeId) called once the template is ready
+function DynamicHallsPiecePlacement.getOrLoadTemplateNodeId(placeable, packKey, pieceDefinition, callback)
+    local rootNodeMapping = placeable.i3dMappings["pieces"]
+    if rootNodeMapping == nil then
+        return
+    end
+    local rootNodeId = rootNodeMapping.nodeId
+
+    local spec = placeable["spec_FS25_DynamicHalls.dynamicHallsPlaceable"]
     spec.pieceTemplateNodeIds = spec.pieceTemplateNodeIds or {}
-    local templateKey = placedPiece.packKey .. "." .. placedPiece.pieceKey
+    local templateKey = packKey .. "." .. pieceDefinition.key
 
     local templateNodeId = spec.pieceTemplateNodeIds[templateKey]
     if templateNodeId ~= nil then
-        DynamicHallsPiecePlacement.placeClone(pieceDefinition, templateNodeId, rootNodeId, placeable, placedPiece)
+        callback(templateNodeId)
         return
     end
 
@@ -71,7 +92,7 @@ function DynamicHallsPiecePlacement.spawn(placeable, placedPiece)
             delete(i3dNode)
 
             spec.pieceTemplateNodeIds[templateKey] = meshNodeId
-            DynamicHallsPiecePlacement.placeClone(pieceDefinition, meshNodeId, rootNodeId, placeable, placedPiece)
+            callback(meshNodeId)
         end, nil, nil)
 end
 
@@ -96,17 +117,45 @@ end
 -- @param table placeable the placeable instance
 -- @param table placedPiece the PlacedEdgePiece/PlacedTilePiece to place
 function DynamicHallsPiecePlacement.placeClone(pieceDefinition, templateNodeId, rootNodeId, placeable, placedPiece)
-    local spec = placeable["spec_FS25_DynamicHalls.dynamicHallsPlaceable"]
+    local nodeId = DynamicHallsPiecePlacement.cloneAtGridPosition(pieceDefinition, templateNodeId, rootNodeId,
+        placeable, placedPiece.row, placedPiece.column, placedPiece.rotation)
+    addToPhysics(nodeId)
+end
 
-    local row, column = pieceDefinition.placement:getWorldGridPosition(placedPiece.row, placedPiece.column,
-        placedPiece.rotation)
-    local x = -spec.width / 2 + column * DynamicHallsConstants.PIECE_CELL_SIZE
-    local z = -spec.length / 2 + row * DynamicHallsConstants.PIECE_CELL_SIZE
-
+---Clones templateNodeId and moves/rotates the clone to the given grid position, using
+-- pieceDefinition's own placement type to resolve the piece's visual center. Does not add the
+-- clone to physics - callers that place the piece permanently must do that themselves.
+-- @param table pieceDefinition the piece being placed
+-- @param integer templateNodeId node to clone
+-- @param integer rootNodeId node to link the clone under
+-- @param table placeable the placeable instance
+-- @param integer row grid row of the piece's own corner
+-- @param integer column grid column of the piece's own corner
+-- @param float rotation rotation around the piece's own corner, in degrees
+function DynamicHallsPiecePlacement.cloneAtGridPosition(pieceDefinition, templateNodeId, rootNodeId, placeable, row,
+    column, rotation)
     local nodeId = clone(templateNodeId, false, false, false)
     link(rootNodeId, nodeId)
-    setTranslation(nodeId, x, 0, z)
-    setRotation(nodeId, 0, math.rad(placedPiece.rotation), 0)
     setVisibility(nodeId, true)
-    addToPhysics(nodeId)
+    DynamicHallsPiecePlacement.updateNodePosition(pieceDefinition, nodeId, placeable, row, column, rotation)
+    return nodeId
+end
+
+---Moves/rotates an already-placed/cloned node to the given grid position, using pieceDefinition's
+-- own placement type to resolve the piece's visual center.
+-- @param table pieceDefinition the piece being moved
+-- @param integer nodeId node to move/rotate
+-- @param table placeable the placeable instance
+-- @param integer row grid row of the piece's own corner
+-- @param integer column grid column of the piece's own corner
+-- @param float rotation rotation around the piece's own corner, in degrees
+function DynamicHallsPiecePlacement.updateNodePosition(pieceDefinition, nodeId, placeable, row, column, rotation)
+    local spec = placeable["spec_FS25_DynamicHalls.dynamicHallsPlaceable"]
+
+    local centerRow, centerColumn = pieceDefinition.placement:getWorldGridPosition(row, column, rotation)
+    local x = -spec.width / 2 + centerColumn * DynamicHallsConstants.PIECE_CELL_SIZE
+    local z = -spec.length / 2 + centerRow * DynamicHallsConstants.PIECE_CELL_SIZE
+
+    setTranslation(nodeId, x, 0, z)
+    setRotation(nodeId, 0, math.rad(rotation), 0)
 end

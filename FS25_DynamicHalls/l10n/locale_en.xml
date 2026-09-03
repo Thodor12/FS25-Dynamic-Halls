@@ -23,5 +23,6 @@
         <e k="dynamichalls_categoryWalls"         v="Walls"/>
         <e k="dynamichalls_categoryRoofs"         v="Roofs"/>
         <e k="dynamichalls_categoryFloors"        v="Floors"/>
+        <e k="dynamichalls_placementOutsideGrid"  v="Place sections on the baseplate"/>
     </elements>
 </l10n>
